@@ -1,0 +1,17 @@
+.banner__membership-button,
+.banner__donate-button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.banner__membership-button {
+  background-color: #e6e6e6;
+  color: #333;
+}
+
+.banner__donate-button {
+  background-color: #ffd320;
+  color: #333;
+}

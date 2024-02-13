@@ -75,15 +75,4 @@ const sortedSpaceHighlights = computed(() => {
 });
 </script>
 
-<style>
-.space-highlights {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-body {
-  background-color: black;
-  font-family: "Ariel", A, serif;
-}
-</style>
+<style lang="scss" src="../sass/main.scss"></style>
