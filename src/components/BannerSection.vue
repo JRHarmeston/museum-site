@@ -8,12 +8,13 @@
           class="banner__logo"
         />
       </div>
-      <div class="banner__search-group">
+      <button class="banner__menu-toggle" @click="toggleMenu">☰</button>
+      <div class="banner__search-group" :class="{ 'is-active': menuActive }">
         <input type="text" placeholder="Search" class="banner__search-bar" />
         <button class="banner__membership-button">Membership</button>
         <button class="banner__donate-button">Donate</button>
       </div>
-      <nav class="banner__nav">
+      <nav class="banner__nav" :class="{ 'is-active': menuActive }">
         <ul class="banner__menu">
           <li><a href="#">Visit</a></li>
           <li><a href="#">Discover</a></li>
@@ -28,6 +29,13 @@
   </header>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
+const menuActive = ref(false);
+
+function toggleMenu() {
+  menuActive.value = !menuActive.value;
+}
+</script>
 
 <style lang="scss" src="../sass/main.scss"></style>

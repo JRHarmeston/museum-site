@@ -42,6 +42,9 @@
     max-height: 100%;
     object-fit: cover;
   }
+  .highlight-card__title {
+    color: white;
+  }
 
   &__content {
     width: 200px;
@@ -70,5 +73,20 @@
   &__news-title {
     font-size: 1rem;
     margin: 0.5rem 0;
+  }
+
+  &__refresh {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+      background-color: darken(#007bff, 10%);
+    }
   }
 }

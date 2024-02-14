@@ -2,19 +2,21 @@
   <Banner />
   <div class="space-highlights">
     <MuseumHighlight
-      v-for="highlight in sortedSpaceHighlights"
+      v-for="highlight in sortedSpaceItems"
       :key="highlight.id"
       :highlight="highlight"
+      :class="{ 'dark-blue-background': highlight.isPartner }"
     />
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref, computed } from "vue";
 import MuseumHighlight from "../components/MuseumHighlight.vue";
 import Banner from "../components/BannerSection.vue";
-import { ref, computed } from "vue";
+import { Highlight } from "../types/types";
 
-const spaceHighlights = ref([
+const spaceHighlights = ref<Highlight[]>([
   {
     date: "2020-04-20 12:20:00",
     description:
@@ -57,22 +59,35 @@ const spaceHighlights = ref([
   },
 ]);
 
-const spacePartners = ref({
+const spacePartners = ref<{ [key: string]: Highlight }>({
   observatory: {
-    createdAt: "2020-06-01 11:45:00",
-    info: "The Mauna Kea Observatories (MKO) are a number of independent astronomical research facilities and large telescope observatories that are located at the summit of Mauna Kea on the Big Island of Hawaiʻi, United States.",
+    date: "2020-06-01 11:45:00",
+    description:
+      "The Mauna Kea Observatories (MKO) are a number of independent astronomical research facilities and large telescope observatories that are located at the summit of Mauna Kea on the Big Island of Hawaiʻi, United States.",
     image: "../../images/mkobservatories.png",
     name: "Mauna Kea Observatories",
+    isPartner: true,
   },
 });
 
-const sortedSpaceHighlights = computed(() => {
-  const allHighlights = [...spaceHighlights.value];
-  allHighlights.sort(
+const spacePartnersArray = computed(() => {
+  return Object.values(spacePartners.value).map((partner) => ({
+    ...partner,
+    id: "partner-" + partner.name,
+  }));
+});
+
+const sortedSpaceItems = computed(() => {
+  return [...spaceHighlights.value, ...spacePartnersArray.value].sort(
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
-  return allHighlights;
 });
 </script>
 
 <style lang="scss" src="../sass/main.scss"></style>
+
+<style>
+.dark-blue-background {
+  background-color: #000027;
+}
+</style>

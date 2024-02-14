@@ -1,7 +1,7 @@
 export interface Highlight {
   date: string;
   description: string;
-  id?: number;
+  id?: number | string;
   image: string;
   name: string;
   news?: {
@@ -9,6 +9,7 @@ export interface Highlight {
     title: string;
   };
   quiz?: string;
+  isPartner?: boolean;
 }
 
 export interface HighlightNews {

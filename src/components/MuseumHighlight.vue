@@ -27,6 +27,7 @@
         </p>
       </div>
     </div>
+    <button class="highlight-card__refresh" @click="onRefresh">Refresh</button>
   </div>
 </template>
 
@@ -36,7 +37,11 @@ import { Highlight } from "@/types/types";
 
 const props = defineProps<{ highlight: Highlight }>();
 
-const formatDate = (dateString: string | undefined) => {
+const onRefresh = () => {
+  // This would cycle through images from the API to generate new images every time.
+};
+
+const formatDate = (dateString: string | undefined): string => {
   if (!dateString) return "";
 
   const options: Intl.DateTimeFormatOptions = {
@@ -45,9 +50,22 @@ const formatDate = (dateString: string | undefined) => {
     day: "numeric",
     hour: "numeric",
     minute: "numeric",
+    timeZoneName: "short",
   };
-  return new Date(dateString).toLocaleDateString(undefined, options);
+  return new Date(dateString).toLocaleDateString("default", options);
 };
 </script>
 
-<style lang="scss" src="../sass/components/_museumHighlight.scss"></style>
+<style scoped>
+.highlight-card {
+  position: relative;
+}
+
+.highlight-card__refresh {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+</style>
+
+<style lang="scss" src="../sass/main.scss"></style>
