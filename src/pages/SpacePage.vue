@@ -12,6 +12,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
+import _ from "lodash";
 import MuseumHighlight from "../components/MuseumHighlight.vue";
 import Banner from "../components/BannerSection.vue";
 import { Highlight } from "../types/types";
@@ -71,15 +72,16 @@ const spacePartners = ref<{ [key: string]: Highlight }>({
 });
 
 const spacePartnersArray = computed(() => {
-  return Object.values(spacePartners.value).map((partner) => ({
+  return _.values(spacePartners.value).map((partner) => ({
     ...partner,
     id: "partner-" + partner.name,
   }));
 });
 
 const sortedSpaceItems = computed(() => {
-  return [...spaceHighlights.value, ...spacePartnersArray.value].sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  return _.sortBy(
+    [...spaceHighlights.value, ...spacePartnersArray.value],
+    (item) => new Date(item.date).getTime()
   );
 });
 </script>
